@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "quiz-app-tailwind-draft-1",
+    "quiz-final-draft-1": "quiz-app-tailwind-draft-1"
+  },
+  "targets": {}
+}

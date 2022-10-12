@@ -1,0 +1,22 @@
+/* .options {
+  width: 1400px;
+} */
+
+@media (max-width: 640px) {
+  .mobileHidden {
+    display: none;
+  }
+  .mobileShow {
+    display: show;
+  }
+}
+
+@media (min-width: 641px) {
+  .large-hidden {
+    display: none;
+  }
+}
+
+.flip-horizontally {
+  transform: scaleX(-1);
+}

@@ -1,0 +1,42 @@
+.content-div {
+  height: 94%;
+}
+
+.main-div {
+  height: 100%;
+}
+
+.podem-wrapper {
+  left: 20%;
+}
+
+.first-place {
+  left: 33%;
+  z-index: 10;
+}
+
+.third-place {
+  left: 66%;
+}
+
+.names {
+  top: -30px;
+  transform: rotate(-5deg);
+}
+
+.top-score-details {
+  position: relative;
+  top: -15px;
+}
+
+.previous-score-gray {
+  height: 450px;
+}
+
+.previous-score-white {
+  height: 365px;
+}
+
+/* .best-scores-gray {
+  height: 330px;
+} */
