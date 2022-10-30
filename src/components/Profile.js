@@ -11,6 +11,7 @@ function Profile(props) {
   const [userResultsData, setUserResultsData] = useState({});
   const [quizOneDisplayScores, setQuizOneDisplayScores] = useState([]);
   const [quizTwoDisplayScores, setQuizTwoDisplayScores] = useState([]);
+  const [topScoreDisplay, setTopScoreDisplay] = useState(1);
 
   useEffect(() => {
     console.log("use effect");
@@ -184,7 +185,7 @@ function Profile(props) {
                               ></div>
                             </div>
                           </div>
-                          <div className="lg:mr-6 mr-3 mt-2 sm:text-md text-sm">
+                          <div className="lg:mr-6 mr-3 ml-2 mt-2 sm:text-md text-sm">
                             {formatDate(value.date)}
                           </div>
                         </div>
@@ -199,8 +200,37 @@ function Profile(props) {
                   <div className="w-full ml-8 font-semibold">
                     Top scores across all players
                   </div>
-                  <div className="bg-white rounded flex-grow my-4 mx-8 relative lg:h-72 h-80">
-                    <div className="w-10/12 sm:w-7/12 h-full mx-auto bottom-0 podem-wrapper grid grid-cols-3">
+                  <div className="bg-white rounded flex-grow my-4 mx-8 relative previous-score-white">
+                    <div className="h-1/6 flex flex-row justify-between w-1/2 mx-auto">
+                      <button
+                        onClick={() => {
+                          setTopScoreDisplay(1);
+                        }}
+                        className="text-blue-700 underline cursor-pointer"
+                        style={{
+                          fontWeight: topScoreDisplay === 1 ? "bold" : "",
+                        }}
+                      >
+                        Quiz 1
+                      </button>
+                      <button
+                        onClick={() => {
+                          setTopScoreDisplay(2);
+                        }}
+                        className="text-blue-700 underline cursor-pointer"
+                        style={{
+                          fontWeight: topScoreDisplay === 2 ? "bold" : "",
+                        }}
+                      >
+                        Quiz 2
+                      </button>
+                    </div>
+                    <div
+                      className="w-10/12 sm:w-7/12 h-5/6 mx-auto bottom-0 podem-wrapper grid grid-cols-3"
+                      style={{
+                        display: topScoreDisplay === 1 ? "" : "none",
+                      }}
+                    >
                       <div className="flex flex-col justify-end">
                         <div className="h-3/6 bottom-0 bg-gray-300 rounded shadow shadow-gray-400">
                           <div className="relative names font-semibold text-center">
@@ -226,6 +256,58 @@ function Profile(props) {
                           <div className="text-center top-score-details">
                             {" "}
                             8/8
+                          </div>
+                          <div className="text-center mt-2 text-sm top-score-details">
+                            18/09/22
+                          </div>{" "}
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-end">
+                        <div className="h-2/6 bottom-0 third-place bg-gray-300 rounded shadow-sm shadow-gray-400">
+                          <div className="relative names font-semibold text-center">
+                            name
+                          </div>
+                          <div className="text-center top-score-details">
+                            6/8
+                          </div>
+                          <div className="text-center mt-2 text-sm top-score-details">
+                            18/09/22
+                          </div>{" "}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      className="w-10/12 sm:w-7/12 h-5/6 mx-auto bottom-0 podem-wrapper grid grid-cols-3"
+                      style={{
+                        display: topScoreDisplay === 2 ? "" : "none",
+                      }}
+                    >
+                      <div className="flex flex-col justify-end">
+                        <div className="h-3/6 bottom-0 bg-gray-300 rounded shadow shadow-gray-400">
+                          <div className="relative names font-semibold text-center">
+                            {/* {Object.values(quizOneDisplayScores)[1].quizName} */}
+                          </div>
+                          <div className="text-center top-score-details">
+                            {/* {Object.values(quizOneDisplayScores)[1].quizResults} */}
+                            {/* /{Object.values(quizOneDisplayScores)[1].quizLength} */}
+                          </div>
+                          <div className="text-center mt-2 text-sm top-score-details">
+                            {/* {formatDate(
+                              Object.values(quizOneDisplayScores)[1].date
+                            )} */}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col justify-end">
+                        <div className="h-4/6 bottom-0 first-place bg-gray-300 rounded shadow-md shadow-gray-400">
+                          <div className="relative names font-semibold text-center">
+                            name
+                          </div>
+                          <div className="text-center top-score-details">
+                            {" "}
+                            7/8
                           </div>
                           <div className="text-center mt-2 text-sm top-score-details">
                             18/09/22
@@ -326,7 +408,7 @@ function Profile(props) {
                       <div className="mx-auto">
                         <button
                           type="button"
-                          className="text-white xl:text-5xl sm:text-4xl text-2xl bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg 2xl:px-20 2xl:py-12 sm:px-8 sm:py-8 px-4 py-6 text-center ml-2 mb-2"
+                          className="text-white xl:text-5xl sm:text-4xl text-2xl bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg 2xl:px-16 2xl:py-12 sm:px-6 sm:py-8 px-3 py-6 text-center mr-2 mb-2"
                           onClick={() => {
                             navigate("/quiz");
                           }}
@@ -339,7 +421,7 @@ function Profile(props) {
                       <div className="mx-auto">
                         <button
                           type="button"
-                          className="text-white xl:text-5xl sm:text-4xl text-2xl bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg 2xl:px-20 2xl:py-12 sm:px-8 sm:py-8 px-4 py-6 text-center mr-2 mb-2"
+                          className="text-white xl:text-5xl sm:text-4xl text-2xl bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg 2xl:px-16 2xl:py-12 sm:px-6 sm:py-8 px-3 py-6 text-center mr-2 mb-2"
                           onClick={() => {
                             navigate("/quiztwo");
                           }}
