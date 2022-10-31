@@ -164,6 +164,7 @@ function App() {
         { id: 3, text: "10000km" },
       ],
       correctAnswerIndex: 3,
+      correctAnswer: "10000km",
       explanation: "The sun is really big.",
     },
     {
@@ -175,6 +176,7 @@ function App() {
         { id: 3, text: "purple" },
       ],
       correctAnswerIndex: 1,
+      correctAnswer: "yellow",
       explanation: "Bananas are yellow.",
     },
     {
@@ -186,6 +188,7 @@ function App() {
         { id: 3, text: "0" },
       ],
       correctAnswerIndex: 0,
+      correctAnswer: "4",
       explanation: "Two more than two is four.",
     },
   ];
@@ -402,7 +405,7 @@ function App() {
               setResultsKey={setResultsKey}
               user={user}
               auth={auth}
-              questionsArray={array}
+              questionsArray={arrayTwo}
             />
           }
         />

@@ -4,7 +4,7 @@ import { UserAuth } from "../App";
 import { getDatabase, ref, set, push } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
-function Results(props) {
+function ResultsTwo(props) {
   const { user } = UserAuth();
   const [arrayIndex, setArrayIndex] = useState(0);
   const [userResultsData, setUserResultsData] = useState([]);
@@ -78,7 +78,7 @@ function Results(props) {
           </div>
         </div>
 
-        <div className="w-screen text-center mb-10 md:mb-20">
+        <div className="w-screen text-2xl md:text-4xl text-center px-6 sm:px-12 mb-10 md:mb-20">
           {props.questionsArray[selectedQuestionIndex].question}
         </div>
 
@@ -97,7 +97,7 @@ function Results(props) {
                   />
                   <label
                     for={answer.id}
-                    className="inline-flex justify-between items-center p-5 w-full sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    className="inline-flex justify-between  text-xl md:text-2xl items-center p-5 w-80 sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                     style={{
                       background: resultColor(
                         props.questionsArray[selectedQuestionIndex]
@@ -195,10 +195,10 @@ function Results(props) {
             </li> */}
           </ul>
         </div>
-        <div className="text-3xl md:text-5xl ml-14 mt-8 font-semibold text-black">
+        <div className="text-2xl md:text-3xl ml-8 sm:ml-14 mt-8 font-semibold text-black">
           Correct Answer: {correctAnswer}
         </div>
-        <div className="text-3xl md:text-5xl ml-14 mt-8 font-medium text-black">
+        <div className="text-xl md:text-2xl mx-8 sm:mx-14 mt-8 font-medium text-black">
           {" "}
           Explanation: {props.questionsArray[selectedQuestionIndex].explanation}
         </div>
@@ -207,7 +207,7 @@ function Results(props) {
           <div>
             {props.questionsArray.map((question, index) => (
               <button
-                className="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                className="text-white text-lg md:text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-4 py-1.5 md:px-5 md:py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 onClick={() => setSelectedQuestionIndex(index)}
               >
                 Q{index + 1}
@@ -216,7 +216,7 @@ function Results(props) {
           </div>
           <div>
             <button
-              className="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              className="text-white text-lg md:text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               onClick={() => {
                 navigate("/profile");
               }}
@@ -230,4 +230,4 @@ function Results(props) {
   );
 }
 
-export default Results;
+export default ResultsTwo;

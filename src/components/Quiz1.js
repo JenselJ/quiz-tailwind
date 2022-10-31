@@ -111,7 +111,7 @@ function Quiz1(props) {
                 />
                 <label
                   for={answer.id}
-                  className="inline-flex justify-between items-center p-5 w-full sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  className="inline-flex justify-between items-center p-5 w-80 sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   <div className="block">
                     <div className="w-full text-lg font-semibold">

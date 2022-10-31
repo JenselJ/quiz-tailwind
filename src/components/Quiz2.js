@@ -94,8 +94,8 @@ function Quiz2(props) {
           {props.array[arrayIndex].question}
         </div>
 
-        <div className="w-screen mx-auto grid gap-14">
-          <ul className="grid gap-8 md:gap-14 w-full md:grid-cols-2 flex sm:items-center sm:justify-center mb-3">
+        <div className="w-screen mx-auto">
+          <ul className="grid gap-8 md:gap-14 w-full xl:w-2/3 mx-auto md:grid-cols-2 sm:items-center sm:justify-center mb-3 flex items-start">
             {props.array[arrayIndex].answers.map((answer) => (
               <li key={answer.id} className="mx-auto">
                 <input
@@ -111,7 +111,7 @@ function Quiz2(props) {
                 />
                 <label
                   for={answer.id}
-                  className="inline-flex justify-between items-center p-5 w-full sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  className="inline-flex text-2xl justify-between items-center p-5 w-80 sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   <div className="block">
                     <div className="w-full text-lg font-semibold">

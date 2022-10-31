@@ -12,6 +12,7 @@ function Profile(props) {
   const [quizOneDisplayScores, setQuizOneDisplayScores] = useState([]);
   const [quizTwoDisplayScores, setQuizTwoDisplayScores] = useState([]);
   const [topScoreDisplay, setTopScoreDisplay] = useState(1);
+  const [quizNameDisplay, setQuizNameDisplay] = useState();
 
   useEffect(() => {
     console.log("use effect");
@@ -97,7 +98,13 @@ function Profile(props) {
             }
           });
 
+          console.log(JSON.parse(JSON.stringify(quizOneArray)));
+
+          console.log(JSON.parse(JSON.stringify(quizTwoArray)));
+
           console.log(scoresArray);
+
+          setQuizNameDisplay(quizOneArray[1].quizName);
 
           setQuizOneDisplayScores(quizOneArray);
 
@@ -135,6 +142,10 @@ function Profile(props) {
     let A = (one / two) * 100;
     return `${A}%`;
   };
+
+  // function showQuizResults() {
+  //   return quizOneDisplayScores[1].quizName;
+  // }
 
   return (
     <>
@@ -234,11 +245,15 @@ function Profile(props) {
                       <div className="flex flex-col justify-end">
                         <div className="h-3/6 bottom-0 bg-gray-300 rounded shadow shadow-gray-400">
                           <div className="relative names font-semibold text-center">
-                            {/* {Object.values(quizOneDisplayScores)[1].quizName} */}
+                            {/* {setTimeout(() => {
+                              showQuizResults();
+                            }, "2000")} */}
+                            {/* {quizOneDisplayScores[1].quizName} */}
+                            {quizNameDisplay}
                           </div>
                           <div className="text-center top-score-details">
-                            {/* {Object.values(quizOneDisplayScores)[1].quizResults} */}
-                            {/* /{Object.values(quizOneDisplayScores)[1].quizLength} */}
+                            {/* {Object.values(quizOneDisplayScores)[1].quizResults}
+                            /{Object.values(quizOneDisplayScores)[1].quizLength} */}
                           </div>
                           <div className="text-center mt-2 text-sm top-score-details">
                             {/* {formatDate(
