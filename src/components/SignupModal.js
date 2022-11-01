@@ -9,6 +9,8 @@ const SignupModal = ({
   setLoginShow,
   email,
   setEmail,
+  setUsername,
+  username,
 }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,13 +22,17 @@ const SignupModal = ({
     console.log("handle submit");
     e.preventDefault();
     setError("");
-    try {
-      await createUser(email, password);
-      navigate("/profile");
-      // navigate to the profile screen if successful
-    } catch (error) {
-      setError(error.message);
-      alert(error.message);
+    if (username === "") {
+      alert("please input a username");
+    } else {
+      try {
+        await createUser(email, password, username);
+        navigate("/profile");
+        // navigate to the profile screen if successful
+      } catch (error) {
+        setError(error.message);
+        alert(error.message);
+      }
     }
   };
 
@@ -83,9 +89,19 @@ const SignupModal = ({
                       id="email"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="name@company.com"
-                      required=""
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Your username
+                    </label>
+                    <input
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      placeholder="justin_25"
+                      // pattern="^[A-Za-z0-9]{3,16}$"
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div>
@@ -98,7 +114,6 @@ const SignupModal = ({
                       id="password"
                       placeholder="••••••••"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                      required=""
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>

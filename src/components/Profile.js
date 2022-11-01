@@ -13,6 +13,10 @@ function Profile(props) {
   const [quizTwoDisplayScores, setQuizTwoDisplayScores] = useState([]);
   const [topScoreDisplay, setTopScoreDisplay] = useState(1);
   const [quizNameDisplay, setQuizNameDisplay] = useState();
+  const [quizOneFirstPlaceName, setQuizOneFirstPlaceName] = useState();
+  const [quizOneFirstPlaceScore, setQuizOneFirstPlaceScore] = useState();
+  const [quizOneFirstPlaceLength, setQuizOneFirstPlaceLength] = useState();
+  const [quizOneFirstPlaceDate, setQuizOneFirstPlaceDate] = useState();
 
   useEffect(() => {
     console.log("use effect");
@@ -104,7 +108,13 @@ function Profile(props) {
 
           console.log(scoresArray);
 
-          setQuizNameDisplay(quizOneArray[1].quizName);
+          setQuizOneFirstPlaceName(quizOneArray[0].quizUser);
+
+          setQuizOneFirstPlaceScore(quizOneArray[0].quizResults);
+
+          setQuizOneFirstPlaceLength(quizOneArray[0].quizLength);
+
+          setQuizOneFirstPlaceDate(quizOneArray[0].date);
 
           setQuizOneDisplayScores(quizOneArray);
 
@@ -155,7 +165,9 @@ function Profile(props) {
             The Quiz Club
           </div>
           <div className="sm:mr-10 mr-4 flex">
-            <div className="sm:mr-10 mr-2 text-sm sm:text-md">{user.email}</div>
+            <div className="sm:mr-10 mr-2 text-sm sm:text-md">
+              {user.displayName}
+            </div>
             <div className="text-sm text-gray-400 cursor-pointer hover:opacity-75 duration-150 text-sm sm:text-md">
               Log out
             </div>
@@ -266,14 +278,14 @@ function Profile(props) {
                       <div className="flex flex-col justify-end">
                         <div className="h-4/6 bottom-0 first-place bg-gray-300 rounded shadow-md shadow-gray-400">
                           <div className="relative names font-semibold text-center">
-                            name
+                            {quizOneFirstPlaceName}
                           </div>
                           <div className="text-center top-score-details">
                             {" "}
-                            8/8
+                            {quizOneFirstPlaceScore}/{quizOneFirstPlaceLength}
                           </div>
                           <div className="text-center mt-2 text-sm top-score-details">
-                            18/09/22
+                            {formatDate(quizOneFirstPlaceDate)}
                           </div>{" "}
                         </div>
                       </div>

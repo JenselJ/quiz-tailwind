@@ -57,7 +57,7 @@ function Quiz2(props) {
       date: Date.now(),
       quizName: "Quiz 2",
       quizLength: props.array.length,
-      quizUser: user.email,
+      quizUser: user.displayName,
     });
   }
 

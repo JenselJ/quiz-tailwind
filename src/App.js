@@ -74,12 +74,13 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
 
-  const createUser = (email, password) => {
+  const createUser = (email, password, username) => {
     console.log("calling create user");
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        user.displayName = username;
         setUser(user);
         console.log(user);
         // ...
@@ -149,6 +150,7 @@ function App() {
   const [user, setUser] = useState();
   const [resultsKey, setResultsKey] = useState();
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     setEmail("");
@@ -320,6 +322,8 @@ function App() {
                 setUser={setUser}
                 email={email}
                 setEmail={setEmail}
+                setUsername={setUsername}
+                username={username}
               />
               <LandingPage
                 signupShow={signupShow}
