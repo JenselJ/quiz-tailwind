@@ -157,6 +157,14 @@ function Profile(props) {
   //   return quizOneDisplayScores[1].quizName;
   // }
 
+  function displayName() {
+    if (user.displayName == !null) {
+      return <div>{user.displayName}</div>;
+    } else {
+      return <div>{props.username}</div>;
+    }
+  }
+
   return (
     <>
       <div className="h-screen flex-column">
@@ -166,11 +174,17 @@ function Profile(props) {
           </div>
           <div className="sm:mr-10 mr-4 flex">
             <div className="sm:mr-10 mr-2 text-sm sm:text-md">
-              {user.displayName}
+              {console.log(user)}
+              {displayName()}
             </div>
-            <div className="text-sm text-gray-400 cursor-pointer hover:opacity-75 duration-150 text-sm sm:text-md">
+            <button
+              className="text-sm text-gray-400 cursor-pointer hover:opacity-75 duration-150 text-sm sm:text-md"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
               Log out
-            </div>
+            </button>
           </div>
         </div>
         <div className="bg-gray-200 sm:py-6 sm:px-12 py-3 px-6 flex-grow">

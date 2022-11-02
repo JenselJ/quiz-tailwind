@@ -24,6 +24,7 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 import { createContext, useContext } from "react";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
@@ -31,6 +32,7 @@ import { useNavigate, Navigate, useLocation } from "react-router-dom";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import ResetPassword from "./components/ResetPassword";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -80,10 +82,13 @@ export const AuthContextProvider = ({ children }) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        user.displayName = username;
+        updateProfile(user, {
+          displayName: username,
+        });
+        return user;
+      })
+      .then((user) => {
         setUser(user);
-        console.log(user);
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -144,6 +149,7 @@ export const UserAuth = () => {
 function App() {
   const [signupShow, setSignupShow] = useState(false);
   const [loginShow, setLoginShow] = useState(false);
+  const [resetPasswordShow, setResetPasswordShow] = useState(false);
 
   const [userInput, setUserInput] = useState([]);
 
@@ -338,6 +344,13 @@ function App() {
                 setSignupShow={setSignupShow}
                 auth={auth}
                 setUser={setUser}
+                setResetPasswordShow={setResetPasswordShow}
+              />
+              <ResetPassword
+                setLoginShow={setLoginShow}
+                auth={auth}
+                setResetPasswordShow={setResetPasswordShow}
+                resetPasswordShow={resetPasswordShow}
               />
             </>
           }
@@ -377,7 +390,7 @@ function App() {
           path="/profile"
           element={
             <RequireAuth>
-              <Profile firebaseapp={app} />
+              <Profile firebaseapp={app} username={username} />
             </RequireAuth>
           }
         />
