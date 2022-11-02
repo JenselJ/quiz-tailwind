@@ -147,9 +147,9 @@ export const UserAuth = () => {
 };
 
 function App() {
-  const [signupShow, setSignupShow] = useState(false);
-  const [loginShow, setLoginShow] = useState(false);
-  const [resetPasswordShow, setResetPasswordShow] = useState(false);
+  const [signupShow, setSignupShow] = useState();
+  const [loginShow, setLoginShow] = useState();
+  const [resetPasswordShow, setResetPasswordShow] = useState();
 
   const [userInput, setUserInput] = useState([]);
 

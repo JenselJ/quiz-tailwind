@@ -13,12 +13,31 @@ const SignupModal = ({
   username,
 }) => {
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordConfirmFail, setPasswordConfirmFail] = useState(false);
+  const [usernameFail, setUsernameFail] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const { createUser } = UserAuth();
 
-  const handleSubmit = async (e) => {
+  function handleSubmit() {
+    if (passwordConfirm !== password) {
+      setPasswordConfirmFail(true);
+    } else {
+      setPasswordConfirmFail(false);
+    }
+    if (username === "") {
+      setUsernameFail(true);
+    } else {
+      setUsernameFail(false);
+    }
+    if (passwordConfirm === password && username !== "") {
+      createNewUser();
+    }
+  }
+
+  const createNewUser = async (e) => {
     console.log("handle submit");
     e.preventDefault();
     setError("");
@@ -100,9 +119,20 @@ const SignupModal = ({
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="justin_25"
+                      style={{
+                        borderColor: usernameFail === true ? "red" : "",
+                      }}
                       // pattern="^[A-Za-z0-9]{3,16}$"
                       onChange={(e) => setUsername(e.target.value)}
                     />
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: passwordConfirmFail === true ? "" : "none",
+                      }}
+                    >
+                      Please input a username
+                    </label>
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -116,6 +146,30 @@ const SignupModal = ({
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       onChange={(e) => setPassword(e.target.value)}
                     />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Confirm password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      style={{
+                        borderColor: passwordConfirmFail === true ? "red" : "",
+                      }}
+                      onChange={(e) => setPasswordConfirm(e.target.value)}
+                    />
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: passwordConfirmFail === true ? "" : "none",
+                      }}
+                    >
+                      Passwords do not match
+                    </label>
                   </div>
                   <button
                     type="submit"
