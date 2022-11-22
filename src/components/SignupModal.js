@@ -17,43 +17,63 @@ const SignupModal = ({
   const [passwordConfirmFail, setPasswordConfirmFail] = useState(false);
   const [usernameFail, setUsernameFail] = useState(false);
   const [error, setError] = useState("");
+  const [signupBackground, setSignupBackground] = useState(false);
   const navigate = useNavigate();
 
   const { createUser } = UserAuth();
 
-  function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log(e);
     if (passwordConfirm !== password) {
       setPasswordConfirmFail(true);
     } else {
       setPasswordConfirmFail(false);
     }
-    if (username === "") {
+    if (username === "" || username.length > 9) {
       setUsernameFail(true);
     } else {
       setUsernameFail(false);
     }
     if (passwordConfirm === password && username !== "") {
-      createNewUser();
-    }
-  }
-
-  const createNewUser = async (e) => {
-    console.log("handle submit");
-    e.preventDefault();
-    setError("");
-    if (username === "") {
-      alert("please input a username");
-    } else {
+      // createNewUser(e);
+      setSignupBackground(true);
+      setError("");
       try {
         await createUser(email, password, username);
+        setSignupShow(false);
         navigate("/profile");
         // navigate to the profile screen if successful
       } catch (error) {
+        console.log("error logged in signup modal");
         setError(error.message);
         alert(error.message);
+        setSignupBackground(false);
       }
     }
-  };
+  }
+
+  // const createNewUser = async (e) => {
+  //   console.log("handle submit");
+  //   setSignupBackground(true);
+  //   e.preventDefault();
+  //   setError("");
+  //   if (username === "") {
+  //     alert("please input a username");
+  //   } else {
+  //     try {
+  //       await createUser(email, password, username);
+  //       navigate("/profile");
+  //       // navigate to the profile screen if successful
+  //     } catch (error) {
+  //       setError(error.message);
+  //       console.error(error);
+  //       alert(error.message);
+
+  //       setSignupBackground(false);
+  //     }
+  //   }
+  // };
 
   function loginHere() {
     setSignupShow(false);
@@ -128,10 +148,10 @@ const SignupModal = ({
                     <label
                       className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
                       style={{
-                        display: passwordConfirmFail === true ? "" : "none",
+                        display: usernameFail === true ? "" : "none",
                       }}
                     >
-                      Please input a username
+                      Please input a username between 1 and 9 characters long
                     </label>
                   </div>
                   <div>
@@ -175,6 +195,10 @@ const SignupModal = ({
                     type="submit"
                     className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={handleSubmit}
+                    style={{
+                      backgroundColor: signupBackground === true ? "gray" : "",
+                      cursor: signupBackground === true ? "wait" : "",
+                    }}
                   >
                     Create your account
                   </button>

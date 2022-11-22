@@ -115,9 +115,15 @@ function Quiz2(props) {
                 >
                   <div className="block">
                     <div className="w-full text-lg font-semibold">
-                      {() => {
-                        answerOption(answer.id);
-                      }}
+                      {answer.id === 0
+                        ? "A"
+                        : answer.id === 1
+                        ? "B"
+                        : answer.id === 2
+                        ? "C"
+                        : answer.id === 3
+                        ? "D"
+                        : ""}
                     </div>
                     <div className="w-full">{answer.text}</div>
                   </div>
@@ -206,6 +212,9 @@ function Quiz2(props) {
             type="button"
             onClick={minusOneFromIndex}
             class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-purple-800 font-medium rounded-lg px-4 py-2 lg:px-5 lg:py-2.5 text-center mr-2 mb-2"
+            style={{
+              visibility: arrayIndex === 0 ? "hidden" : "",
+            }}
           >
             Previous Question
           </button>
@@ -220,6 +229,9 @@ function Quiz2(props) {
             type="button"
             onClick={nextBtnHandler}
             class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-purple-800 font-medium rounded-lg px-4 py-2 lg:px-5 lg:py-2.5 text-center mr-2 mb-2"
+            style={{
+              visibility: arrayIndex === props.array.length - 1 ? "hidden" : "",
+            }}
           >
             Next Question
           </button>

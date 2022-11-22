@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 function Quiz1(props) {
   const { user } = UserAuth();
   const [arrayIndex, setArrayIndex] = useState(0);
-  const [userResultsData, setUserResultsData] = useState([]);
 
   useEffect(() => {
     console.log("use effect");
@@ -67,14 +66,15 @@ function Quiz1(props) {
   }
 
   function answerOption(answer) {
+    console.log("answerOption called");
     if (answer === 0) {
-      return <div className="w-full text-lg font-semibold">A</div>;
+      return console.log("a");
     } else if (answer === 1) {
-      return <div className="w-full text-lg font-semibold">B</div>;
+      return console.log("b");
     } else if (answer === 2) {
-      return <div className="w-full text-lg font-semibold">C</div>;
+      return console.log("c");
     } else if (answer === 3) {
-      return <div className="w-full text-lg font-semibold">D</div>;
+      return console.log("d");
     }
   }
 
@@ -115,11 +115,23 @@ function Quiz1(props) {
                 >
                   <div className="block">
                     <div className="w-full text-lg font-semibold">
-                      {() => {
-                        answerOption(answer.id);
-                      }}
+                      {answer.id === 0
+                        ? "A"
+                        : answer.id === 1
+                        ? "B"
+                        : answer.id === 2
+                        ? "C"
+                        : answer.id === 3
+                        ? "D"
+                        : ""}
                     </div>
-                    <div className="w-full">{answer.text}</div>
+                    <div className="w-full pl-4">
+                      {/* {answer.id === 1 ? "B" : setUselessState(0)}
+                      {answer.id === 2 ? "C" : setUselessState(0)}
+                      {answer.id === 3 ? "D" : setUselessState(0)} */}
+
+                      {answer.text}
+                    </div>
                   </div>
                 </label>
               </li>
@@ -206,6 +218,9 @@ function Quiz1(props) {
             type="button"
             onClick={minusOneFromIndex}
             class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-purple-800 font-medium rounded-lg px-4 py-2 lg:px-5 lg:py-2.5 text-center mr-2 mb-2"
+            style={{
+              visibility: arrayIndex === 0 ? "hidden" : "",
+            }}
           >
             Previous Question
           </button>
@@ -220,6 +235,9 @@ function Quiz1(props) {
             type="button"
             onClick={nextBtnHandler}
             class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-purple-800 font-medium rounded-lg px-4 py-2 lg:px-5 lg:py-2.5 text-center mr-2 mb-2"
+            style={{
+              visibility: arrayIndex === props.array.length - 1 ? "hidden" : "",
+            }}
           >
             Next Question
           </button>

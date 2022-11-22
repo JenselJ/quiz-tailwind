@@ -89,12 +89,6 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then((user) => {
         setUser(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-        // ..
       });
   };
 
@@ -283,19 +277,6 @@ function App() {
       correctAnswerIndex: 1,
       explanation:
         "The conditional (ternary) operator is the only JavaScript operator that takes three operands: a condition followed by a question mark (?), then an expression to execute if the condition is truthy followed by a colon (:), and finally the expression to execute if the condition is falsy.",
-    },
-    {
-      question:
-        "Which one of these is not a valid way to declare a JavaScript function?",
-      answers: [
-        { id: 0, text: "function myFunction() {}" },
-        { id: 1, text: "const isTruthy => function() {}" },
-        { id: 2, text: "const absValue = (number) => {}" },
-        { id: 3, text: "(function(variable) {return typeof variable; }).name" },
-      ],
-      correctAnswerIndex: 1,
-      explanation:
-        "B is incorrect and the arrow function should be an equal sign: const isTruthy = function() {}. D is an anonymous function.",
     },
     {
       question:

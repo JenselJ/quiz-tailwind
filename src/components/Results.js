@@ -74,7 +74,7 @@ function ResultsTwo(props) {
             / {props.questionsArray.length}
           </div>
           <div className="mx-auto text-3xl md:text-5xl w-1/2 text-center text-black">
-            Q{arrayIndex + 1} of {props.array.length}
+            Q{selectedQuestionIndex + 1} of {props.array.length}
           </div>
         </div>
 
@@ -97,7 +97,7 @@ function ResultsTwo(props) {
                   />
                   <label
                     for={answer.id}
-                    className="inline-flex justify-between  text-xl md:text-2xl items-center p-5 w-80 sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 hover:text-white hover:bg-gray-500 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    className="inline-flex justify-between  text-xl md:text-2xl items-center p-5 w-80 sm:w-96 text-white bg-gray-400 rounded-lg border border-gray-200 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:bg-gray-700 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                     style={{
                       background: resultColor(
                         props.questionsArray[selectedQuestionIndex]

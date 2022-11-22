@@ -10,8 +10,10 @@ const LoginModal = ({
   setResetPasswordShow,
 }) => {
   const navigate = useNavigate();
+  const [loginBackground, setLoginBackground] = useState(false);
 
   const handleSubmit = async (e) => {
+    setLoginBackground(true);
     console.log("handle submit");
     e.preventDefault();
     setError("");
@@ -23,12 +25,14 @@ const LoginModal = ({
       // set(reference, {
       //   quizResults: [0, 1, 2]
       // })
+      setLoginShow(false);
       navigate("/profile");
       // navigate to the profile screen if successful
     } catch (error) {
       setError(error.message);
       alert(error.message);
       console.error(error);
+      setLoginBackground(false);
     }
   };
 
@@ -139,6 +143,10 @@ const LoginModal = ({
                   <button
                     type="submit"
                     className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    style={{
+                      backgroundColor: loginBackground === true ? "gray" : "",
+                      cursor: loginBackground === true ? "wait" : "",
+                    }}
                     onClick={handleSubmit}
                   >
                     Log in to your account
