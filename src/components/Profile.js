@@ -13,10 +13,8 @@ function Profile(props) {
   const [quizTwoDisplayScores, setQuizTwoDisplayScores] = useState([]);
   const [topScoreDisplay, setTopScoreDisplay] = useState(1);
   const [quizNameDisplay, setQuizNameDisplay] = useState();
-  const [quizOneFirstPlaceName, setQuizOneFirstPlaceName] = useState();
-  const [quizOneFirstPlaceScore, setQuizOneFirstPlaceScore] = useState();
-  const [quizOneFirstPlaceLength, setQuizOneFirstPlaceLength] = useState();
-  const [quizOneFirstPlaceDate, setQuizOneFirstPlaceDate] = useState();
+  const [quizOneUserTopScore, setQuizOneUserTopScore] = useState();
+  const [quizTwoUserTopScore, setQuizTwoUserTopScore] = useState();
 
   useEffect(() => {
     console.log("use effect");
@@ -46,6 +44,41 @@ function Profile(props) {
           setUserResultsData(dataArray);
 
           console.log(userResultsData);
+
+          let quizOneTopScore = [];
+
+          let quizTwoTopScore = [];
+
+          let dataArrayTwo = Object.values(data).flatMap((score) => {
+            return { ...score, id: score[0] };
+          });
+
+          dataArrayTwo.map((score) => {
+            if (score.quizName === "Quiz 1") {
+              return quizOneTopScore.push(score);
+            } else if (score.quizName === "Quiz 2") {
+              return quizTwoTopScore.push(score);
+            }
+          });
+
+          quizOneTopScore.sort(function (a, b) {
+            if (b.quizResults === a.quizResults) {
+              return b.date - a.date;
+            } else {
+              return b.quizResults - a.quizResults;
+            }
+          });
+
+          quizTwoTopScore.sort(function (a, b) {
+            if (b.quizResults === a.quizResults) {
+              return b.date - a.date;
+            } else {
+              return b.quizResults - a.quizResults;
+            }
+          });
+
+          setQuizOneUserTopScore(quizOneTopScore[0]);
+          setQuizTwoUserTopScore(quizTwoTopScore[0]);
         } else {
           console.log("No data available");
         }
@@ -101,20 +134,6 @@ function Profile(props) {
               return b.quizResults - a.quizResults;
             }
           });
-
-          console.log(JSON.parse(JSON.stringify(quizOneArray)));
-
-          console.log(JSON.parse(JSON.stringify(quizTwoArray)));
-
-          console.log(scoresArray);
-
-          setQuizOneFirstPlaceName(quizOneArray[0].quizUser);
-
-          setQuizOneFirstPlaceScore(quizOneArray[0].quizResults);
-
-          setQuizOneFirstPlaceLength(quizOneArray[0].quizLength);
-
-          setQuizOneFirstPlaceDate(quizOneArray[0].date);
 
           setQuizOneDisplayScores(quizOneArray);
 
@@ -191,7 +210,7 @@ function Profile(props) {
           <div className="sm:mb-4 mb-3 font-semibold">Profile</div>
           <div className="content-div bg-white rounded grid lg:grid-cols-2 grid-cols-1">
             <div className="grid grid-cols-1 pb-4 pr-4 pt-8 lg:pl-8 pl-4">
-              <div className="bg-gray-200 rounded grid grid-cols-1 pt-4">
+              <div className="bg-gray-200 rounded grid grid-cols-1 pt-4 pb-4">
                 <div className="flex flex-col">
                   <div className="w-full ml-8 font-semibold">Start a quiz</div>
                   <div className="bg-white rounded flex-grow my-4 mx-8 grid grid-cols-2 h-48">
@@ -227,7 +246,7 @@ function Profile(props) {
             </div>
 
             <div className="grid grid-cols-1 pb-4 lg:pr-8 pt-8 pr-4 pl-4">
-              <div className="bg-gray-200 rounded grid grid-cols-1 pt-4 flex flex-grow best-scores-gray">
+              <div className="bg-gray-200 rounded grid grid-cols-1 pt-4 pb-4 flex flex-grow best-scores-gray">
                 <div className="flex flex-col">
                   <div className="w-full ml-8 font-semibold">
                     Your best scores
@@ -240,21 +259,35 @@ function Profile(props) {
                       <div className="h-5/6">
                         <div className="m-4 bg-gray-200 h-5/6 rounded-md grid grid-cols-1">
                           <div className="w-full text-center mt-4">
-                            19/09/22
+                            {formatDate(
+                              quizOneUserTopScore && quizOneUserTopScore.date
+                            )}
                           </div>
                           <div className="w-10/12 mx-auto">
                             <div className="flex justify-between mb-1">
                               <span className="text-base font-medium text-blue-700 dark:text-white">
-                                Quiz 1
+                                {quizOneUserTopScore &&
+                                  quizOneUserTopScore.quizName}{" "}
                               </span>
                               <span className="text-sm font-medium text-blue-700 dark:text-white">
-                                5/8
+                                {quizOneUserTopScore &&
+                                  quizOneUserTopScore.quizResults}
+                                /{" "}
+                                {quizOneUserTopScore &&
+                                  quizOneUserTopScore.quizLength}
                               </span>
                             </div>
                             <div className="w-full bg-white rounded-full h-2.5 dark:bg-gray-700">
                               <div
                                 className="bg-blue-600 h-2.5 rounded-full"
-                                style={{ width: "60%" }}
+                                style={{
+                                  width: markPercentage(
+                                    quizOneUserTopScore &&
+                                      quizOneUserTopScore.quizResults,
+                                    quizOneUserTopScore &&
+                                      quizOneUserTopScore.quizLength
+                                  ),
+                                }}
                               ></div>
                             </div>
                           </div>{" "}
@@ -268,21 +301,35 @@ function Profile(props) {
                       <div className="h-5/6">
                         <div className="m-4 bg-gray-200 h-5/6 rounded-md grid grid-cols-1">
                           <div className="w-full text-center mt-4">
-                            19/09/22
+                            {formatDate(
+                              quizTwoUserTopScore && quizTwoUserTopScore.date
+                            )}{" "}
                           </div>
                           <div className="w-10/12 mx-auto">
                             <div className="flex justify-between mb-1">
                               <span className="text-base font-medium text-blue-700 dark:text-white">
-                                Quiz 2
+                                {quizTwoUserTopScore &&
+                                  quizTwoUserTopScore.quizName}{" "}
                               </span>
                               <span className="text-sm font-medium text-blue-700 dark:text-white">
-                                6/8
+                                {quizTwoUserTopScore &&
+                                  quizTwoUserTopScore.quizResults}
+                                /{" "}
+                                {quizTwoUserTopScore &&
+                                  quizTwoUserTopScore.quizLength}
                               </span>
                             </div>
                             <div className="w-full bg-white rounded-full h-2.5 dark:bg-gray-700">
                               <div
                                 className="bg-blue-600 h-2.5 rounded-full"
-                                style={{ width: "75%" }}
+                                style={{
+                                  width: markPercentage(
+                                    quizTwoUserTopScore &&
+                                      quizTwoUserTopScore.quizResults,
+                                    quizTwoUserTopScore &&
+                                      quizTwoUserTopScore.quizLength
+                                  ),
+                                }}
                               ></div>
                             </div>
                           </div>{" "}
@@ -337,7 +384,7 @@ function Profile(props) {
             </div>
 
             <div className="grid grid-cols-1 pb-8 lg:pr-8 pt-4 pl-4 pr-4">
-              <div className="bg-gray-200 rounded grid grid-cols-1 pt-4">
+              <div className="bg-gray-200 rounded grid grid-cols-1 pt-4 pb-4">
                 <div className="flex flex-col">
                   <div className="w-full ml-8 font-semibold">
                     Top scores across all players

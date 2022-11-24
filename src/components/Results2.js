@@ -109,9 +109,15 @@ function ResultsTwo(props) {
                   >
                     <div className="block">
                       <div className="w-full text-lg font-semibold">
-                        {() => {
-                          answerOption(answer.id);
-                        }}
+                        {answer.id === 0
+                          ? "A"
+                          : answer.id === 1
+                          ? "B"
+                          : answer.id === 2
+                          ? "C"
+                          : answer.id === 3
+                          ? "D"
+                          : ""}
                       </div>
                       <div className="w-full">{answer.text}</div>
                     </div>
