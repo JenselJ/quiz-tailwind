@@ -306,12 +306,21 @@ function Profile(props) {
                             )}{" "}
                           </div>
                           <div className="w-10/12 mx-auto">
-                            <div className="flex justify-between mb-1">
+                            <div className="flex justify-between mb-1 hidden">
                               <span className="text-base font-medium text-blue-700 dark:text-white">
                                 {quizTwoUserTopScore &&
                                   quizTwoUserTopScore.quizName}{" "}
                               </span>
-                              <span className="text-sm font-medium text-blue-700 dark:text-white">
+                              <span
+                                className="text-sm font-medium text-blue-700 dark:text-white"
+                                style={{
+                                  visiblity:
+                                    quizTwoUserTopScore &&
+                                    quizTwoUserTopScore.quizResults
+                                      ? "show"
+                                      : "hidden",
+                                }}
+                              >
                                 {quizTwoUserTopScore &&
                                   quizTwoUserTopScore.quizResults}
                                 /{" "}

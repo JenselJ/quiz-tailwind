@@ -59,8 +59,8 @@ function ResultsTwo(props) {
   return (
     <>
       <div className="min-h-screen flex flex-col text-black text-5xl bg-white">
-        <div className="text-3xl md:text-4xl ml-3 mt-3 font-semibold text-black">
-          Quiz 1
+        <div className="text-3xl md:text-4xl ml-3 mt-3 font-semibold text-black w-screen text-center">
+          Quiz 2
         </div>
         <div className="flex flex-row justify-content w-screen mb-10 md:mb-20 mt-10 md:mt-14 font-bold">
           <div className="mx-auto text-3xl md:text-5xl w-1/2 text-center outline-black text-black">
